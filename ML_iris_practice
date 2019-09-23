@@ -1,0 +1,45 @@
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+"""
+获取数据、数据预处理
+"""
+iris = datasets.load_iris()
+iris_X = iris.data
+iris_y = iris.target
+# print(len(iris_X))
+# print(len(iris_y))
+# print(iris_X[:4])
+# print(iris_y)
+
+X_train, X_test, y_train, y_test = train_test_split(iris_X, iris_y, test_size=0.3)
+##将数据分为训练数据和测试数据，其中训练数据占70%，测试数据占30%
+# print(len(X_train))
+# print(len(y_train))
+# print(iris_X)
+
+"""
+建立模型
+"""
+knn = KNeighborsClassifier()
+# print(knn)
+
+"""
+训练数据（用我们的模型knn训练数据）
+"""
+
+knn.fit(X_train, y_train)
+
+"""
+测试
+"""
+predict_y = knn.predict(X_test)
+# print(predict_y)
+##输出y，意思是用我们训练好的knn，对测试数据进行预测，看得出的结果y是否与实际相符合
+# print(y_test)
+
+compare_y = np.array([predict_y==y_test])
+#print(compare_y)
+#print(np.where(compare_y==False))
+#print(compare_y)
